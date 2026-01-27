@@ -1,23 +1,16 @@
 "use client";
 
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -28,6 +21,7 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
+import { ModeToggle } from "./ModeToggle";
 
 interface MenuItem {
   title: string;
@@ -61,21 +55,15 @@ interface Navbar1Props {
 
 const Navbar = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
+    url: "http://localhost:3000/",
+    src: "/mna-mediStore.png",
     alt: "logo",
     title: "MNA MediStore",
   },
   menu = [
     { title: "Home", url: "/" },
-    {
-      title: "Pricing",
-      url: "/",
-    },
-    {
-      title: "Blog",
-      url: "/",
-    },
+    { title: "Medicines", url: "/medicines" },
+    { title: "Dashboard", url: "/dashboard" },
   ],
   auth = {
     login: { title: "Login", url: "/login" },
@@ -84,53 +72,59 @@ const Navbar = ({
   className,
 }: Navbar1Props) => {
   return (
-    <section className={cn("py-4", className)}>
-      <div className="container">
-        {/* Desktop Menu */}
+    <section className={cn("py-2 border-b border-b-lime-950", className)}>
+      <div className="container mx-auto px-4">
+        {/* ===============
+            Desktop Menu
+        ================ */}
         <nav className="hidden items-center justify-between lg:flex">
-          <div className="flex items-center gap-6">
-            {/* Logo */}
-            <Link href={logo.url} className="flex items-center gap-2">
+          <div>
+            <Link href={logo.url} className="flex items-center gap-1">
               <Image
                 src={logo.src}
-                height={12}
-                width={12}
-                className="max-h-8 dark:invert"
+                height={48}
+                width={48}
                 alt={logo.alt}
+                preload
               />
-              <span className="text-lg font-semibold tracking-tighter">
+              <span className="text-2xl font-bold tracking-tighter">
                 {logo.title}
               </span>
             </Link>
-            <div className="flex items-center">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  {menu.map((item) => renderMenuItem(item))}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
+          </div>
+
+          <div className="flex items-center">
+            <NavigationMenu>
+              <NavigationMenuList>
+                {menu.map((item) => renderMenuItem(item))}
+              </NavigationMenuList>
+            </NavigationMenu>
           </div>
           <div className="flex gap-2">
+            <ModeToggle />
             <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.title}</a>
+              <Link href={auth.login.url}>{auth.login.title}</Link>
             </Button>
             <Button asChild size="sm">
-              <a href={auth.signup.url}>{auth.signup.title}</a>
+              <Link href={auth.signup.url}>{auth.signup.title}</Link>
             </Button>
           </div>
         </nav>
 
-        {/* Mobile Menu */}
+        {/* ===========
+          Mobile Menu
+        ============= */}
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
+            <Link href={logo.url} className="flex items-center gap-2">
               <Image
                 src={logo.src}
-                className="max-h-8 dark:invert"
+                className="max-h-8"
+                height={32}
+                width={32}
                 alt={logo.alt}
               />
-            </a>
+            </Link>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -140,13 +134,15 @@ const Navbar = ({
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <a href={logo.url} className="flex items-center gap-2">
+                    <Link href={logo.url} className="flex items-center gap-2">
                       <Image
                         src={logo.src}
-                        className="max-h-8 dark:invert"
+                        className="max-h-8"
+                        height={32}
+                        width={32}
                         alt={logo.alt}
                       />
-                    </a>
+                    </Link>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
@@ -159,11 +155,12 @@ const Navbar = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
+                    <ModeToggle />
                     <Button asChild variant="outline">
-                      <a href={auth.login.url}>{auth.login.title}</a>
+                      <Link href={auth.login.url}>{auth.login.title}</Link>
                     </Button>
                     <Button asChild>
-                      <a href={auth.signup.url}>{auth.signup.title}</a>
+                      <Link href={auth.signup.url}>{auth.signup.title}</Link>
                     </Button>
                   </div>
                 </div>
@@ -177,72 +174,23 @@ const Navbar = ({
 };
 
 const renderMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <NavigationMenuItem key={item.title}>
-        <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-        <NavigationMenuContent className="bg-popover text-popover-foreground">
-          {item.items.map((subItem) => (
-            <NavigationMenuLink asChild key={subItem.title} className="w-80">
-              <SubMenuLink item={subItem} />
-            </NavigationMenuLink>
-          ))}
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    );
-  }
-
   return (
     <NavigationMenuItem key={item.title}>
       <NavigationMenuLink
-        href={item.url}
+        asChild
         className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
       >
-        {item.title}
+        <Link href={item.url}>{item.title}</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );
 };
 
 const renderMobileMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <AccordionItem key={item.title} value={item.title} className="border-b-0">
-        <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
-          {item.title}
-        </AccordionTrigger>
-        <AccordionContent className="mt-2">
-          {item.items.map((subItem) => (
-            <SubMenuLink key={subItem.title} item={subItem} />
-          ))}
-        </AccordionContent>
-      </AccordionItem>
-    );
-  }
-
   return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
+    <Link key={item.title} href={item.url} className="text-md font-semibold">
       {item.title}
-    </a>
-  );
-};
-
-const SubMenuLink = ({ item }: { item: MenuItem }) => {
-  return (
-    <a
-      className="flex min-w-80 flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
-      href={item.url}
-    >
-      <div className="text-foreground">{item.icon}</div>
-      <div>
-        <div className="text-sm font-semibold">{item.title}</div>
-        {item.description && (
-          <p className="text-sm leading-snug text-muted-foreground">
-            {item.description}
-          </p>
-        )}
-      </div>
-    </a>
+    </Link>
   );
 };
 
