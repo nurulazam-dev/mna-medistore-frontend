@@ -22,7 +22,7 @@ import { Chromium } from "lucide-react";
   password: z.string().min(8, "Password must be at least 8 characters long"),
 }); */
 
-export default function LoginForm() {
+export default function RegisterForm() {
   /*   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       email: "",
@@ -88,7 +88,7 @@ export default function LoginForm() {
 
         <div className="relative isolate flex flex-col items-center">
           <p className="mt-4 font-semibold text-xl tracking-tight">
-            Login to MNA-MediStore
+            Register to MNA-MediStore
           </p>
 
           <Button className="mt-8 w-full gap-3">
@@ -150,12 +150,12 @@ export default function LoginForm() {
           {/* </Form> */}
 
           <p className="mt-5 text-center text-sm">
-            If you new here?
+            Already have an account?
             <Link
               className="ml-1 text-muted-foreground underline"
-              href="/register"
+              href="/login"
             >
-              Please register
+              Log in
             </Link>
           </p>
         </div>
