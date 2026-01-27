@@ -1,8 +1,10 @@
 import {
-  DribbbleIcon,
+  FacebookIcon,
   GithubIcon,
-  TwitchIcon,
+  InstagramIcon,
+  Linkedin,
   TwitterIcon,
+  YoutubeIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -31,11 +33,12 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex flex-col">
       <footer className="border-t">
         <div className="mx-auto max-w-(--breakpoint-xl)">
-          <div className="flex flex-col items-start justify-between gap-x-8 gap-y-10 px-6 py-12 sm:flex-row xl:px-0">
-            <div>
+          <div className="grid grid-cols-12 grid-rows-1 gap-5 p-4">
+            {/* brand details part */}
+            <div className="col-span-5">
               <div className="flex items-center gap-2">
                 <Image
                   src="/mna-mediStore.png"
@@ -48,9 +51,18 @@ const Footer = () => {
                   MNA MediStore
                 </p>
               </div>
-              <p className="text-sm">Your Trusted Online Medicine Shop</p>
-
-              <ul className="mt-6 flex flex-wrap items-center gap-4">
+              <p className="text-sm mb-3">Your Trusted Online Medicine Shop</p>
+              {/* <Separator className="my-1" /> */}
+              <p className="text-muted-foreground">
+                MediStore is a e-commerce pharmacy/shop for purchasing
+                over-the-counter (OTC) medicines. You can browse medicines, add
+                to cart, and place orders.
+              </p>
+            </div>
+            {/* Quick Link part */}
+            <div className="col-span-2">
+              <h6 className="font-bold text-xl">Quick Link :</h6>
+              <ul className="mt-2">
                 {footerLinks.map(({ title, href }) => (
                   <li key={title}>
                     <Link
@@ -63,38 +75,74 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-
-            <div className="w-full max-w-xs">
-              <h6 className="font-medium">Stay up to date</h6>
-              <form className="mt-6 flex items-center gap-2">
+            {/* Quick Link part */}
+            <div className="col-span-2">
+              <h6 className="font-bold text-xl">Quick Link :</h6>
+              <ul className="mt-2">
+                {footerLinks.map(({ title, href }) => (
+                  <li key={title}>
+                    <Link
+                      className="text-muted-foreground hover:text-foreground"
+                      href={href}
+                    >
+                      {title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* subscribe part */}
+            <div className="w-full max-w-xs col-span-3">
+              <h6 className="font-bold text-xl">Stay up to date</h6>
+              <form className="my-6 flex items-center gap-2">
                 <Input placeholder="Enter your email" type="email" />
                 <Button>Subscribe</Button>
               </form>
+              {/* logo */}
+              <div className="flex pl-2 items-center gap-5 text-muted-foreground">
+                <Link href="/" target="_blank">
+                  <InstagramIcon className="h-5 w-5" />
+                </Link>
+                <Link href="/" target="_blank">
+                  <FacebookIcon className="h-5 w-5" />
+                </Link>
+                <Link href="/" target="_blank">
+                  <TwitterIcon className="h-5 w-5" />
+                </Link>
+
+                <Link href="/" target="_blank">
+                  <YoutubeIcon className="h-5 w-5" />
+                </Link>
+              </div>
             </div>
           </div>
           <Separator />
-          <div className="flex flex-col-reverse items-center justify-between gap-x-2 gap-y-5 px-6 py-8 sm:flex-row xl:px-0">
-            <span className="text-muted-foreground">
+          <div className="flex flex-col-reverse items-center justify-between gap-x-2 py-3 sm:flex-row xl:px-0">
+            <span className="text-muted-foreground text-sm">
               &copy; {new Date().getFullYear()}{" "}
               <Link href="/" target="_blank">
                 MNA MediStore
               </Link>
               . All rights reserved.
             </span>
-
-            <div className="flex items-center gap-5 text-muted-foreground">
-              <Link href="/" target="_blank">
-                <TwitterIcon className="h-5 w-5" />
+            {/* logo */}
+            <div className="flex items-center gap-2 text-muted-foreground text-sm">
+              <span className="">Develop By :</span>
+              <Link
+                href="/"
+                target="_blank"
+                className="border rounded-full p-1"
+              >
+                <Linkedin className="h-5 w-5" />
               </Link>
-              <Link href="/" target="_blank">
-                <DribbbleIcon className="h-5 w-5" />
-              </Link>
-              <Link href="/" target="_blank">
-                <TwitchIcon className="h-5 w-5" />
-              </Link>
-              <Link href="/" target="_blank">
+              <Link
+                href="/"
+                target="_blank"
+                className="border rounded-full p-1"
+              >
                 <GithubIcon className="h-5 w-5" />
               </Link>
+              <span>@nurulazam-dev</span>
             </div>
           </div>
         </div>

@@ -1,7 +1,9 @@
+import Contact from "@/components/modules/homepage/Contact";
+
 export default function Home() {
   return (
     <div>
-      <h1 className="text-center">MNA Medicine Store</h1>
+      <Contact />
     </div>
   );
 }
