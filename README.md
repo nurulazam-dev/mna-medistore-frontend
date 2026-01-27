@@ -4,6 +4,13 @@
 
 # Project overview & features:
 
+### Admin Credentials
+
+| Item           |     Credential      |
+| -------------- | :-----------------: |
+| Admin Email    | admin@medistore.com |
+| Admin Password |      Admin123       |
+
 > Run the project:
 
 ```TS
