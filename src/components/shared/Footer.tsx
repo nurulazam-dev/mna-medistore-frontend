@@ -19,7 +19,7 @@ const Footer = () => {
       <footer className="border-t">
         <div className="mx-auto max-w-(--breakpoint-xl)">
           <div className="grid grid-cols-12 grid-rows-1 gap-5 p-4">
-            <div className="col-span-5">
+            <div className="md:col-span-5 col-span-12">
               <div className="flex items-center gap-2">
                 <Image
                   src="/mna-mediStore.png"
@@ -42,7 +42,7 @@ const Footer = () => {
             </div>
 
             {footerLinks?.map((s) => (
-              <div key={s?.section} className="col-span-2">
+              <div key={s?.section} className="md:col-span-2 col-span-12">
                 <h6 className="font-bold text-xl">{s?.section}</h6>
                 <ul className="mt-2">
                   {s?.items?.map(({ path, label }) => (
@@ -59,7 +59,7 @@ const Footer = () => {
               </div>
             ))}
 
-            <div className="w-full max-w-xs col-span-3">
+            <div className="w-full max-w-xs md:col-span-3 col-span-12">
               <h6 className="font-bold text-xl">Stay up to date</h6>
               <form className="my-6 flex items-center gap-2">
                 <Input placeholder="Enter your email" type="email" />
