@@ -1,4 +1,10 @@
-import { MailIcon, MapPinIcon, MessageCircle, PhoneIcon } from "lucide-react";
+import {
+  LucideSend,
+  MailIcon,
+  MapPinIcon,
+  MessageCircle,
+  PhoneIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,82 +22,83 @@ import { Textarea } from "@/components/ui/textarea";
 const Contact = () => (
   <div className="flex min-h-screen items-center justify-center py-16">
     <div className="mx-auto w-full max-w-(--breakpoint-xl) px-6 xl:px-0">
-      <b className="font-semibold text-muted-foreground text-sm uppercase">
+      <h2 className="font-bold text-center text-muted-foreground text-2xl uppercase">
         Contact Us
-      </b>
-      <h2 className="mt-3 font-semibold text-3xl tracking-tight md:text-4xl">
-        Chat with our friendly team!
       </h2>
-      <p className="mt-3 text-base text-muted-foreground sm:text-lg">
-        We&apos;d love to hear from you. Please fill out this form or shoot us
-        an email.
-      </p>
-      <div className="mt-16 flex flex-col gap-16 md:gap-10 lg:flex-row">
-        <div className="grid w-full max-w-3xl grid-cols-1 gap-1 border bg-muted p-1 *:border *:bg-background *:p-6 sm:grid-cols-2 lg:col-span-2">
+      <div className="mt-6 grid md:grid-cols-2 grid-cols-1">
+        <div className="w-full max-w-lg mx-auto">
           <div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-foreground/3 bg-foreground/5 text-foreground dark:bg-foreground/10">
+            <h2 className="font-semibold text-2xl tracking-tight md:text-3xl">
+              Chat with our friendly team!
+            </h2>
+            <p className="mt-3 text-base text-muted-foreground sm:text-md">
+              We&apos;d love to hear from you. Please fill out this form or
+              shoot us an email.
+            </p>
+          </div>
+          <div className="flex items-center gap-3 my-3 border rounded p-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-md border border-foreground/3 bg-foreground/5 text-foreground dark:bg-foreground/10">
               <MailIcon />
             </div>
-            <h3 className="mt-6 font-semibold text-xl">Email</h3>
-            <p className="my-2.5 text-muted-foreground">
-              Our friendly team is here to help.
-            </p>
-            <Link
-              className="font-medium text-primary"
-              href="mailto:akashmoradiya3444@gmail.com"
-            >
-              akashmoradiya3444@gmail.com
-            </Link>
+            <div>
+              <h3 className="font-semibold text-xl">Email :</h3>
+              <Link
+                className="font-normal text-primary"
+                href="mailto:contact@medistore.com"
+              >
+                contact@medistore.com
+              </Link>
+            </div>
           </div>
-          <div>
+          <div className="flex items-center gap-3 my-3 border rounded p-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-foreground/3 bg-foreground/5 text-foreground dark:bg-foreground/10">
               <MessageCircle />
             </div>
-            <h3 className="mt-6 font-semibold text-xl">Live chat</h3>
-            <p className="my-2.5 text-muted-foreground">
-              Our friendly team is here to help.
-            </p>
-            <Link className="font-medium text-primary" href="#">
-              Start new chat
-            </Link>
+            <div>
+              <h3 className="font-semibold text-xl">Live chat</h3>
+              <Link className="font-normal text-primary" href="#">
+                Start new chat
+              </Link>
+            </div>
           </div>
-          <div>
+          <div className="flex items-center gap-3 my-3 border rounded p-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-foreground/3 bg-foreground/5 text-foreground dark:bg-foreground/10">
               <MapPinIcon />
             </div>
-            <h3 className="mt-6 font-semibold text-xl">Office</h3>
-            <p className="my-2.5 text-muted-foreground">
-              Come say hello at our office HQ.
-            </p>
-            <Link
-              className="font-medium text-primary"
-              href="https://map.google.com"
-              target="_blank"
-            >
-              100 Smith Street Collingwood <br /> VIC 3066 AU
-            </Link>
+            <div>
+              <h3 className="font-semibold text-xl">Office</h3>
+              <Link
+                className="font-normal text-primary"
+                href="https://map.google.com"
+                target="_blank"
+              >
+                MediStore Market, Raojan <br /> Chattogram
+              </Link>
+            </div>
           </div>
-          <div>
+          <div className="flex items-center gap-3 my-3 border rounded p-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-foreground/3 bg-foreground/5 text-foreground dark:bg-foreground/10">
               <PhoneIcon />
             </div>
-            <h3 className="mt-6 font-semibold text-xl">Phone</h3>
-            <p className="my-2.5 text-muted-foreground">
-              Mon-Fri from 8am to 5pm.
-            </p>
-            <Link
-              className="font-medium text-primary"
-              href="tel:akashmoradiya3444@gmail.com"
-            >
-              +1 (555) 000-0000
-            </Link>
+            <div>
+              <h3 className="font-semibold text-xl">Phone</h3>
+              <Link
+                className="font-normal text-primary"
+                href="tel:+88 0172 123-3215"
+              >
+                +88 0172 123-3215
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="w-full max-w-lg border bg-muted p-1">
-          <Card className="relative isolate rounded-none bg-white/50 shadow-none lg:ms-auto">
-            <CardHeader>
-              <CardTitle>Contact Us</CardTitle>
+        <div className="w-full">
+          <Card className="relative isolate rounded shadow lg:ms-auto">
+            <CardHeader className="text-center">
+              <CardTitle className="flex justify-center items-center gap-3 text-xl">
+                Send Us
+                <LucideSend />
+              </CardTitle>
               <CardDescription>
                 We&apos;d love to hear from you. Please fill out this form.
               </CardDescription>
