@@ -11,25 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-
-const footerLinks = [
-  {
-    title: "Overview",
-    href: "#",
-  },
-  {
-    title: "Medicines",
-    href: "/medicines",
-  },
-  {
-    title: "Careers",
-    href: "#",
-  },
-  {
-    title: "Help",
-    href: "#",
-  },
-];
+import { footerLinks } from "./data";
 
 const Footer = () => {
   return (
@@ -37,7 +19,6 @@ const Footer = () => {
       <footer className="border-t">
         <div className="mx-auto max-w-(--breakpoint-xl)">
           <div className="grid grid-cols-12 grid-rows-1 gap-5 p-4">
-            {/* brand details part */}
             <div className="col-span-5">
               <div className="flex items-center gap-2">
                 <Image
@@ -59,39 +40,25 @@ const Footer = () => {
                 to cart, and place orders.
               </p>
             </div>
-            {/* Quick Link part */}
-            <div className="col-span-2">
-              <h6 className="font-bold text-xl">Quick Link :</h6>
-              <ul className="mt-2">
-                {footerLinks.map(({ title, href }) => (
-                  <li key={title}>
-                    <Link
-                      className="text-muted-foreground hover:text-foreground"
-                      href={href}
-                    >
-                      {title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* Quick Link part */}
-            <div className="col-span-2">
-              <h6 className="font-bold text-xl">Quick Link :</h6>
-              <ul className="mt-2">
-                {footerLinks.map(({ title, href }) => (
-                  <li key={title}>
-                    <Link
-                      className="text-muted-foreground hover:text-foreground"
-                      href={href}
-                    >
-                      {title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* subscribe part */}
+
+            {footerLinks?.map((s) => (
+              <div key={s?.section} className="col-span-2">
+                <h6 className="font-bold text-xl">{s?.section}</h6>
+                <ul className="mt-2">
+                  {s?.items?.map(({ path, label }) => (
+                    <li key={path}>
+                      <Link
+                        className="text-muted-foreground hover:text-foreground"
+                        href={path}
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
             <div className="w-full max-w-xs col-span-3">
               <h6 className="font-bold text-xl">Stay up to date</h6>
               <form className="my-6 flex items-center gap-2">
