@@ -17,6 +17,12 @@
 pnpm run dev
 ```
 
+> Command for add UI component:
+
+```TS
+pnpm dlx shadcn@latest add <component-name>
+```
+
 ## Tech Stack:
 
 ### Frontend
