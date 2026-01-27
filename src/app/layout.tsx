@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import { Navbar } from "@/components/shared/Navbar";
-import Footer from "@/components/shared/Footer";
+import { Space_Grotesk } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const space_Grotesk_init = Space_Grotesk({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-Space_Grotesk",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`font-Space_Grotesk ${space_Grotesk_init.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -36,9 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
           {children}
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

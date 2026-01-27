@@ -115,6 +115,10 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.font-Space_Grotesk {
+  font-family: var(--font-Space_Grotesk);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
