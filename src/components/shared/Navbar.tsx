@@ -63,6 +63,8 @@ const Navbar = ({
   menu = [
     { title: "Home", url: "/" },
     { title: "Medicines", url: "/medicines" },
+    { title: "Cart", url: "/cart" },
+    { title: "Checkout", url: "/checkout" },
     { title: "Dashboard", url: "/dashboard" },
   ],
   auth = {
@@ -101,13 +103,19 @@ const Navbar = ({
             </NavigationMenu>
           </div>
           <div className="flex gap-2">
-            <ModeToggle />
-            <Button asChild variant="outline" size="sm">
+            <Button asChild variant="outline" size="lg">
               <Link href={auth.login.url}>{auth.login.title}</Link>
             </Button>
-            <Button asChild size="sm">
+            <Button asChild size="lg">
               <Link href={auth.signup.url}>{auth.signup.title}</Link>
             </Button>
+            <Button variant="ghost" size="lg" className="text-end">
+              admin <br /> admin@...com
+            </Button>
+            <Button variant="outline" size="lg">
+              Log Out
+            </Button>
+            <ModeToggle />
           </div>
         </nav>
 
