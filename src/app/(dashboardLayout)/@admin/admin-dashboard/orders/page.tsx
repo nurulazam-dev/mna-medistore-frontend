@@ -1,3 +1,3 @@
-export default function ManageOrdersPage() {
-  return <div>Manage Orders Page</div>;
+export default function ManageAllOrdersPage() {
+  return <div>Manage all Orders Page</div>;
 }
