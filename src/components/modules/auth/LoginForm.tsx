@@ -1,165 +1,151 @@
 "use client";
-
-// import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-// import { useForm } from "react-hook-form";
-// import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
-  //   Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Chromium } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import { useForm } from "@tanstack/react-form";
+import Link from "next/link";
+import { toast } from "sonner";
+import * as z from "zod";
 
-/* const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8, "Password must be at least 8 characters long"),
-}); */
+// form-schema for zod validation
+const formSchema = z.object({
+  email: z.email(),
+  password: z.string().min(4, "Minimum length 8"),
+});
 
-export default function LoginForm() {
-  /*   const form = useForm<z.infer<typeof formSchema>>({
+export function LoginForm({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  // Google Login handler
+  const handleGoogleLogin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/dashboard",
+    });
+  };
+
+  const form = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
-    resolver: zodResolver(formSchema),
+    validators: {
+      onSubmit: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      const toastId = toast.loading("Login...");
+      try {
+        const { data, error } = await authClient.signIn.email(value);
+
+        if (error) {
+          toast.error(error.message, { id: toastId });
+          return;
+        }
+
+        toast.success("Logged in successfully", { id: toastId });
+      } catch (err) {
+        toast.error("Login fail, please try again", { id: toastId });
+      }
+    },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
-  }; */
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/70">
-      <div className="relative w-full max-w-sm overflow-hidden rounded-xl border bg-card px-8 py-8 shadow-lg/5 dark:shadow-xl">
-        <div
-          className="absolute inset-0 -top-px -left-px z-0"
-          style={{
-            backgroundImage: `
-        linear-gradient(to right, color-mix(in srgb, var(--card-foreground) 8%, transparent) 1px, transparent 1px),
-        linear-gradient(to bottom, color-mix(in srgb, var(--card-foreground) 8%, transparent) 1px, transparent 1px)
-      `,
-            backgroundSize: "20px 20px",
-            backgroundPosition: "0 0, 0 0",
-            maskImage: `
-        repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            radial-gradient(ellipse 70% 50% at 50% 0%, #000 60%, transparent 100%)
-      `,
-            WebkitMaskImage: `
- repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            radial-gradient(ellipse 70% 50% at 50% 0%, #000 60%, transparent 100%)
-      `,
-            maskComposite: "intersect",
-            WebkitMaskComposite: "source-in",
+    <Card {...props}>
+      <CardHeader className="text-center">
+        <CardTitle className="text-3xl font-bold">
+          Login to your account
+        </CardTitle>
+        <CardDescription>
+          Enter your email below to login to your account
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form
+          id="login-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            form.handleSubmit();
           }}
-        />
-
-        <div className="relative isolate flex flex-col items-center">
-          <p className="mt-4 font-semibold text-xl tracking-tight">
-            Login to MNA-MediStore
-          </p>
-
-          <Button className="mt-8 w-full gap-3">
-            <Chromium />
-            Continue with Google
-          </Button>
-
-          <div className="my-7 flex w-full items-center justify-center overflow-hidden">
-            <Separator />
-            <span className="px-2 text-sm">OR</span>
-            <Separator />
-          </div>
-
-          {/* <Form {...form}> */}
-          <form
-            className="w-full space-y-4"
-            //   onSubmit={form.handleSubmit(onSubmit)}
-          >
-            <FormField
-              // control={form.control}
+        >
+          <FieldGroup>
+            <form.Field
               name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
+                return (
+                  <Field>
+                    <FieldLabel htmlFor={field.name}>Email</FieldLabel>
                     <Input
-                      className="w-full"
-                      placeholder="Email"
                       type="email"
-                      {...field}
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                );
+              }}
             />
-            <FormField
-              // control={form.control}
+            <form.Field
               name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
+                return (
+                  <Field>
+                    <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                     <Input
-                      className="w-full"
-                      placeholder="Password"
                       type="password"
-                      {...field}
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                );
+              }}
             />
-            <Button className="mt-4 w-full" type="submit">
-              Continue with Email
-            </Button>
-          </form>
-          {/* </Form> */}
-
-          <p className="mt-5 text-center text-sm">
-            If you new here?
-            <Link
-              className="ml-1 text-muted-foreground underline"
-              href="/register"
-            >
-              Please register
-            </Link>
-          </p>
-        </div>
-      </div>
-    </div>
+            <Field className="px-6">
+              <Button form="login-form" type="submit" className="w-full">
+                Login
+              </Button>
+              <Button
+                onClick={() => handleGoogleLogin()}
+                variant="outline"
+                type="button"
+              >
+                Continue with Google
+              </Button>
+              <FieldDescription className="text-center">
+                Don&apos;t have an account?{" "}
+                <Link href="/register">Register</Link>
+              </FieldDescription>
+            </Field>
+          </FieldGroup>
+        </form>
+      </CardContent>
+    </Card>
   );
 }

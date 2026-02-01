@@ -88,6 +88,7 @@ const Navbar = ({
                 width={48}
                 alt={logo.alt}
                 preload
+                className="h-auto w-auto object-contain"
               />
               <span className="text-2xl font-bold tracking-tighter">
                 {logo.title}
