@@ -1,12 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Field,
   FieldDescription,
@@ -15,27 +9,28 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { env } from "@/env";
 import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
+import { Chromium, LucideLogIn } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import * as z from "zod";
 
-// form-schema for zod validation
 const formSchema = z.object({
   email: z.email(),
-  password: z.string().min(4, "Minimum length 8"),
+  password: z.string().min(8, "Minimum length 8"),
 });
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  // Google Login handler
   const handleGoogleLogin = async () => {
-    const data = await authClient.signIn.social({
+    const data = authClient.signIn.social({
       provider: "google",
-      callbackURL: "/dashboard",
+      callbackURL: env.NEXT_PUBLIC_FRONTEND,
     });
   };
 
@@ -66,14 +61,10 @@ export function LoginForm({
 
   return (
     <Card {...props}>
-      <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold">
-          Login to your account
-        </CardTitle>
-        <CardDescription>
-          Enter your email below to login to your account
-        </CardDescription>
-      </CardHeader>
+      <div className="text-center">
+        <p className="text-xl text-green-400">Welcome Back</p>
+        <h1 className="text-3xl font-bold">Login your account</h1>
+      </div>
       <CardContent>
         <form
           id="login-form"
@@ -127,24 +118,29 @@ export function LoginForm({
                 );
               }}
             />
-            <Field className="px-6">
-              <Button form="login-form" type="submit" className="w-full">
-                Login
-              </Button>
-              <Button
-                onClick={() => handleGoogleLogin()}
-                variant="outline"
-                type="button"
-              >
-                Continue with Google
-              </Button>
-              <FieldDescription className="text-center">
-                Don&apos;t have an account?{" "}
-                <Link href="/register">Register</Link>
-              </FieldDescription>
-            </Field>
           </FieldGroup>
         </form>
+        <Field className="mt-4">
+          <Button form="login-form" type="submit" className="w-full">
+            Login <LucideLogIn />
+          </Button>
+        </Field>
+        <FieldDescription className="text-center mt-4 text-sm">
+          Don&apos;t have an account? <Link href="/register">Register</Link>
+        </FieldDescription>
+        <div className="flex justify-center items-center overflow-hidden my-3">
+          <Separator />
+          <span className="px-2 text-sm">OR</span>
+          <Separator />
+        </div>
+        <Button
+          onClick={() => handleGoogleLogin()}
+          variant="outline"
+          type="button"
+          className="w-full"
+        >
+          Continue with Google <Chromium />
+        </Button>
       </CardContent>
     </Card>
   );

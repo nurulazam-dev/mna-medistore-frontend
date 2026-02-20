@@ -1,13 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Field,
   FieldDescription,
@@ -16,25 +9,27 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { env } from "@/env";
 import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
+import { Chromium, LucideLogIn } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import * as z from "zod";
 
-// form-schema for zod validation
 const formSchema = z.object({
   name: z.string().min(1, "This field is required"),
   email: z.email(),
-  password: z.string().min(4, "Minimum length 8"),
+  password: z.string().min(8, "Minimum length 8"),
+  role: z.enum(["CUSTOMER", "SELLER"]),
 });
 
 export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
-  // Google Login handler
   const handleGoogleLogin = async () => {
-    const data = await authClient.signIn.social({
+    const data = authClient.signIn.social({
       provider: "google",
-      callbackURL: "http://localhost:3000",
+      callbackURL: env.NEXT_PUBLIC_FRONTEND,
     });
   };
 
@@ -43,6 +38,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
       name: "",
       email: "",
       password: "",
+      role: "CUSTOMER",
     },
     validators: {
       onSubmit: formSchema,
@@ -50,7 +46,13 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
     onSubmit: async ({ value }) => {
       const toastId = toast.loading("Creating user...");
       try {
-        const { data, error } = await authClient.signUp.email(value);
+        const { data, error } = await authClient.signUp.email({
+          email: value.email,
+          password: value.password,
+          role: value.role,
+          name: value.name,
+          callbackURL: "/",
+        } as any);
 
         if (error) {
           toast.error(error.message, { id: toastId });
@@ -59,19 +61,17 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
 
         toast.success("User created successfully", { id: toastId });
       } catch (err) {
-        toast.error("User created fail, please try again", { id: toastId });
+        toast.error("User created fail!", { id: toastId });
       }
     },
   });
 
   return (
     <Card {...props}>
-      <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold">Create an account</CardTitle>
-        <CardDescription>
-          Enter your information below to create your account
-        </CardDescription>
-      </CardHeader>
+      <div className="text-center">
+        <p className="text-md text-green-400">Enter your information to</p>
+        <h1 className="text-3xl font-bold">Create an account</h1>
+      </div>
       <CardContent>
         <form
           id="register-form"
@@ -125,46 +125,76 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                 );
               }}
             />
-            <form.Field
-              name="password"
-              children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
-                return (
+            <div className="grid grid-cols-2 gap-2">
+              <form.Field
+                name="password"
+                children={(field) => {
+                  const isInvalid =
+                    field.state.meta.isTouched && !field.state.meta.isValid;
+                  return (
+                    <Field>
+                      <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                      <Input
+                        type="password"
+                        id={field.name}
+                        name={field.name}
+                        value={field.state.value}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                      />
+                      {isInvalid && (
+                        <FieldError errors={field.state.meta.errors} />
+                      )}
+                    </Field>
+                  );
+                }}
+              />
+
+              <form.Field
+                name="role"
+                children={(field) => (
                   <Field>
-                    <FieldLabel htmlFor={field.name}>Password</FieldLabel>
-                    <Input
-                      type="password"
+                    <FieldLabel htmlFor={field.name}>I am a</FieldLabel>
+                    <select
                       id={field.name}
-                      name={field.name}
                       value={field.state.value}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                    />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
+                      onChange={(e) =>
+                        field.handleChange(e.target.value as any)
+                      }
+                      className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                    >
+                      <option value="CUSTOMER">Customer</option>
+                      <option value="SELLER">Seller</option>
+                    </select>
+                    <FieldError errors={field.state.meta.errors} />
                   </Field>
-                );
-              }}
-            />
+                )}
+              />
+            </div>
           </FieldGroup>
         </form>
-      </CardContent>
-      <Field className="px-6">
-        <Button form="register-form" type="submit" className="w-full">
-          Register
-        </Button>
+
+        <Field className="mt-4">
+          <Button form="register-form" type="submit" className="w-full">
+            Register <LucideLogIn />
+          </Button>
+        </Field>
+        <FieldDescription className="text-center mt-4 text-sm">
+          Already have an account? <Link href="/login">Login</Link>
+        </FieldDescription>
+        <div className="flex justify-center items-center overflow-hidden my-3">
+          <Separator />
+          <span className="px-2 text-sm">OR</span>
+          <Separator />
+        </div>
         <Button
           onClick={() => handleGoogleLogin()}
           variant="outline"
           type="button"
+          className="w-full"
         >
-          Continue with Google
+          Continue with Google <Chromium />
         </Button>
-        <FieldDescription className="text-center">
-          Already have an account? <Link href="/login">Login</Link>
-        </FieldDescription>
-      </Field>
+      </CardContent>
     </Card>
   );
 }

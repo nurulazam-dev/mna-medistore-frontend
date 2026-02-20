@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Space_Grotesk } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import ReduxProvider from "@/providers/ReduxProvider";
 
 const space_Grotesk_init = Space_Grotesk({
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster richColors />
-          {children}
+          <ReduxProvider>{children}</ReduxProvider>
         </ThemeProvider>
       </body>
     </html>

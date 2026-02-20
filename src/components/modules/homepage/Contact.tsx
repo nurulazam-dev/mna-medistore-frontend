@@ -18,14 +18,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import HomeSectionTitle from "./HomeSectionTitle";
 
 const Contact = () => (
-  <div className="flex min-h-screen items-center justify-center py-16">
-    <div className="mx-auto w-full max-w-(--breakpoint-xl) px-6 xl:px-0">
-      <h2 className="font-bold text-center text-muted-foreground text-2xl uppercase">
-        Contact Us
-      </h2>
-      <div className="mt-6 grid md:grid-cols-2 grid-cols-1">
+  <div className="flex min-h-screen items-center justify-center py-12">
+    <div className="">
+      <HomeSectionTitle firstTitle="Contact" lastTitle="Us" />
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-14">
         <div className="w-full max-w-lg mx-auto">
           <div>
             <h2 className="font-semibold text-2xl tracking-tight md:text-3xl">
@@ -158,6 +157,16 @@ const Contact = () => (
             </CardContent>
           </Card>
         </div>
+      </div>
+
+      <div className="w-full h-64 rounded-xl mt-7 overflow-hidden border duration-500">
+        <iframe
+          title="Location Map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.9024424301!2d90.3910!3d23.7509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ1JzAzLjIiTiA5MMKwMjMnMjcuNiJF!5e0!3m2!1sen!2sbd!4v1625000000000"
+          className="w-full h-full border-0"
+          allowFullScreen
+          loading="lazy"
+        ></iframe>
       </div>
     </div>
   </div>
