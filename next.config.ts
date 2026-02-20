@@ -8,7 +8,32 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "ibb.co",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "example.com",
+      },
+      {
+        protocol: "https",
+        hostname: "msh.org",
+      },
     ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: "/api/auth/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BACKEND}/api/auth/:path*`,
+      },
+    ];
   },
 };
 

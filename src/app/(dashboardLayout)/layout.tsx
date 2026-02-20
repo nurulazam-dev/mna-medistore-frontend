@@ -18,7 +18,6 @@ export default async function DashboardLayout({
   customer: React.ReactNode;
 }) {
   const { data } = await userService.getSession();
-
   const userInfo = data?.user;
 
   const dashboardContent = {
@@ -35,7 +34,7 @@ export default async function DashboardLayout({
           <SidebarTrigger className="-ml-1" />
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {dashboardContent[userInfo.role] || customer}
+          {dashboardContent[userInfo?.role] || customer}
         </div>
       </SidebarInset>
     </SidebarProvider>
