@@ -1,7 +1,7 @@
 # 💊 MNA-MediStore (Frontend)
 
 [![Deployment Status](https://img.shields.io/badge/Deployment-Vercel-success)](https://mna-medistore.vercel.app/)
-[![Next.js](https://img.shields.io/badge/Framework-Next.js%2015-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Framework-Next.js%2016-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
