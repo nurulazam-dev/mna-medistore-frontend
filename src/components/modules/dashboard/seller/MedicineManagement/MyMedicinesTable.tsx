@@ -43,7 +43,7 @@ export default function MyMedicinesTable({
             <TableHead className="text-center">Price</TableHead>
             <TableHead className="text-center">Stock</TableHead>
             <TableHead className="text-center">Status</TableHead>
-            {/* <TableHead className="text-right">Created Date</TableHead> */}
+            <TableHead className="text-right">Created Date</TableHead>
             <TableHead className="text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>

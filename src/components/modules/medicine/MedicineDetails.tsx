@@ -244,7 +244,6 @@ export default function MedicineDetails({
   );
 }
 
-// ছোট্ট হেল্পার আইকন (AlertCircle) যদি কোডে না থাকে
 function AlertCircle({ size }: { size: number }) {
   return (
     <svg

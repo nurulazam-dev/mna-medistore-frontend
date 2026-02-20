@@ -63,7 +63,7 @@ export default function AllMedicineOrdersTable({
             <TableHead className="text-center">Total Amount</TableHead>
             <TableHead className="text-center">Payment</TableHead>
             <TableHead className="text-center">Status</TableHead>
-            {/* <TableHead>Ordered At</TableHead> */}
+            <TableHead>Ordered At</TableHead>
             <TableHead className="text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>

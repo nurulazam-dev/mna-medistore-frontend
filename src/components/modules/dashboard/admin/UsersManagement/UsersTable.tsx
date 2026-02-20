@@ -40,7 +40,7 @@ export default function UsersTable({
             <TableHead className="text-center">Phone</TableHead>
             <TableHead className="text-center">Status</TableHead>
             <TableHead className="text-center">Address</TableHead>
-            {/* <TableHead>Created</TableHead> */}
+            <TableHead>Created</TableHead>
             <TableHead className="text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>

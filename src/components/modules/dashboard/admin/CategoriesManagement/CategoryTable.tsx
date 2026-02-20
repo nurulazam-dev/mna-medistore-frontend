@@ -26,7 +26,7 @@ export default function CategoryTable({
             <TableHead className="min-w-37.5 text-center">
               Category Name
             </TableHead>
-            {/* <TableHead>Created Date</TableHead> */}
+            <TableHead>Created Date</TableHead>
             <TableHead className="text-center">Total Medicine</TableHead>
             {/* <TableHead className="w-75">Medicines</TableHead> */}
             <TableHead className="text-right">Actions</TableHead>
