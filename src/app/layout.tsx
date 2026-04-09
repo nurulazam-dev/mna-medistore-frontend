@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Space_Grotesk } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import ReduxProvider from "@/providers/ReduxProvider";
+import AIHealthAssistant from "@/components/modules/AI/AIHealthAssistant";
 
 const space_Grotesk_init = Space_Grotesk({
   subsets: ["latin"],
@@ -33,7 +34,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster richColors />
-          <ReduxProvider>{children}</ReduxProvider>
+          <ReduxProvider>
+            {children}
+            <AIHealthAssistant />
+          </ReduxProvider>
         </ThemeProvider>
       </body>
     </html>
