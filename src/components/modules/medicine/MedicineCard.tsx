@@ -48,7 +48,7 @@ export default function MedicineCard({
           </h3>
           <p className="text-xs font-bold text-slate-300 m-0">
             {" "}
-            <span className="text-indigo-500"> Manufactured By: </span>
+            <span className="text-green-600"> Manufactured By: </span>
             {medicine?.manufacturer}
           </p>
           <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed h-10">
@@ -68,7 +68,7 @@ export default function MedicineCard({
           <Button
             // size="icon"
             variant="link"
-            className="hover:text-indigo-600 transition-colors"
+            className="hover:text-green-600 transition-colors"
           >
             Details <ArrowRight size={18} />
           </Button>

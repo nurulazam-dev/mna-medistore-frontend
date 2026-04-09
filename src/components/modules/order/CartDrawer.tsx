@@ -35,7 +35,7 @@ export default function CartDrawer() {
         >
           <ShoppingCart className="h-6 w-6 text-slate-700" />
           {totalItems > 0 && (
-            <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white animate-in zoom-in">
+            <span className="absolute -top-1 -right-1 bg-green-600 text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white animate-in zoom-in">
               {totalItems}
             </span>
           )}
@@ -44,9 +44,9 @@ export default function CartDrawer() {
 
       <SheetContent className="w-full sm:max-w-md flex flex-col p-0 border-l shadow-2xl">
         <SheetHeader className="p-6 border-b bg-slate-800">
-          <SheetTitle className="flex items-center gap-2 text-xl font-black tracking-tight">
-            <ShoppingBag className="text-indigo-600" />
-            Your <span className="text-indigo-600">Cart</span>
+          <SheetTitle className="flex items-center gap-2 text-xl font-black tracking-tight text-slate-200">
+            <ShoppingBag className="text-green-600" />
+            Your Cart
           </SheetTitle>
         </SheetHeader>
 
@@ -56,9 +56,9 @@ export default function CartDrawer() {
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="flex gap-4 bg-white p-3 rounded-lg border border-slate-100 shadow-sm transition-all hover:border-indigo-100"
+                  className="flex gap-4 bg-slate-200 p-3 rounded-md border border-slate-100 shadow-sm transition-all hover:border-indigo-100"
                 >
-                  <div className="relative h-16 w-16 rounded bg-slate-200 overflow-hidden shrink-0 border border-slate-400">
+                  <div className="relative h-16 w-16 rounded dark:bg-slate-200 bg-slate-800 overflow-hidden shrink-0 border border-slate-400">
                     <Image
                       src={item.image || "/placeholder.png"}
                       alt={item.name}
@@ -72,13 +72,13 @@ export default function CartDrawer() {
                       <h4 className="text-sm font-bold text-slate-800 line-clamp-1 leading-tight">
                         {item.name}
                       </h4>
-                      <p className="text-[11px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">
+                      <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">
                         $ {Number(item.price).toFixed(2)} / unit
                       </p>
                     </div>
 
                     <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center border rounded-xl bg-slate-400 shadow-inner">
+                      <div className="flex items-center border rounded-xl border-green-600 shadow-inner">
                         <Button
                           variant="ghost"
                           size="icon"
@@ -104,7 +104,7 @@ export default function CartDrawer() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 text-red-500 bg-slate-400 transition-colors"
+                        className="h-8 w-8 text-red-500 border border-red-500 transition-colors"
                         onClick={() => dispatch(removeFromCart(item.id))}
                       >
                         <Trash2 size={16} />
@@ -116,20 +116,18 @@ export default function CartDrawer() {
             </div>
           ) : (
             <div className="h-full flex flex-col items-center justify-center text-center space-y-4">
-              <div className="bg-slate-400 p-8 rounded-full border-2 border-red-600">
-                <ShoppingBag size={56} className="text-indigo-600" />
+              <div className=" p-8 rounded-full border border-red-600">
+                <ShoppingBag size={56} className="text-green-600" />
               </div>
-              <div className="space-y-1">
-                <p className="text-slate-500 font-black text-lg">
-                  Your cart is empty
-                </p>
-                <p className="text-slate-400 text-sm">
+              <div className="space-y-1 text-slate-700 dark:text-slate-400">
+                <p className=" font-black text-lg">Your cart is empty</p>
+                <p className=" text-sm">
                   Looks like you haven't added anything yet.
                 </p>
               </div>
               <Button
                 asChild
-                className="rounded-xl bg-indigo-600 px-8 py-6 font-bold"
+                className="rounded-md bg-green-600 px-8 py-6 font-bold text-white"
               >
                 <Link href="/medicines">Explore Medicines</Link>
               </Button>
@@ -140,24 +138,22 @@ export default function CartDrawer() {
         {items.length > 0 && (
           <SheetFooter className="p-6  border-t flex-col sm:flex-col gap-4 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.05)]">
             <div className="w-full space-y-2">
-              <div className="flex justify-between text-sm font-medium text-slate-400">
+              <div className="flex justify-between text-sm font-medium dark:text-slate-400 text-slate-800">
                 <span>Subtotal ({totalItems} items)</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-xl font-black text-slate-300">
+              <div className="flex justify-between text-xl font-black text-slate-600 dark:text-slate-300">
                 <span>Total Amount</span>
-                <span className="text-indigo-600">
-                  ${totalPrice.toFixed(2)}
-                </span>
+                <span className="text-green-600">${totalPrice.toFixed(2)}</span>
               </div>
             </div>
             <Button
-              className="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-base rounded-2xl transition-all active:scale-[0.98]"
+              className="w-full h-14 bg-green-600 hover:bg-green-700 text-white font-black text-base rounded-xl transition-all active:scale-[0.98]"
               asChild
             >
               <Link href="/checkout">Checkout Now</Link>
             </Button>
-            <p className="text-[10px] text-center text-slate-400 uppercase tracking-widest font-black">
+            <p className="text-[10px] text-center text-slate-600 dark:text-slate-400 uppercase tracking-widest font-black">
               Safe & Secure Payments
             </p>
           </SheetFooter>
