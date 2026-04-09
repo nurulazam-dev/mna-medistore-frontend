@@ -8,6 +8,7 @@ import Hero from "@/components/modules/homepage/Hero";
 import HowItWorks from "@/components/modules/homepage/HowItWorks";
 import KeyFeatures from "@/components/modules/homepage/KeyFeatures";
 import MedicineCategories from "@/components/modules/homepage/MedicineCategories";
+import PartnerBrands from "@/components/modules/homepage/PartnerBrands";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
       <Certifications />
       {/* <FlashSales /> */}
       {/* <HealthBlogs /> */}
-      {/* <PartnerBrands /> */}
+      <PartnerBrands />
       {/* <Newsletter /> */}
       {/* <FAQSection /> */}
       <HowItWorks />

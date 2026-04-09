@@ -46,10 +46,7 @@ export default function FeaturedProducts() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
-              Featured{" "}
-              <span className="text-indigo-600 dark:text-indigo-500">
-                Healthcare
-              </span>{" "}
+              Featured <span className="text-green-700">Healthcare</span>{" "}
               Essentials
             </h2>
             <p className="text-slate-500 dark:text-slate-400 font-medium">
