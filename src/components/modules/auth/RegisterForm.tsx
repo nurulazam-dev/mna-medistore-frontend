@@ -67,7 +67,10 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
   });
 
   return (
-    <Card {...props}>
+    <Card
+      {...props}
+      className="border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/40 hover:bg-white dark:hover:bg-slate-900/55 transition-all duration-500"
+    >
       <div className="text-center">
         <p className="text-md text-green-400">Enter your information to</p>
         <h1 className="text-3xl font-bold">Create an account</h1>
@@ -174,7 +177,11 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         </form>
 
         <Field className="mt-4">
-          <Button form="register-form" type="submit" className="w-full">
+          <Button
+            form="register-form"
+            type="submit"
+            className="w-full bg-green-600 hover:bg-green-700 text-white"
+          >
             Register <LucideLogIn />
           </Button>
         </Field>
@@ -190,7 +197,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
           onClick={() => handleGoogleLogin()}
           variant="outline"
           type="button"
-          className="w-full"
+          className="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300"
         >
           Continue with Google <Chromium />
         </Button>

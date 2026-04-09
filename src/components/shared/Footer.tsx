@@ -63,7 +63,9 @@ const Footer = () => {
               <h6 className="font-bold text-xl">Stay up to date</h6>
               <form className="my-6 flex items-center gap-2">
                 <Input placeholder="Enter your email" type="email" />
-                <Button>Subscribe</Button>
+                <Button className="bg-green-600 hover:bg-green-700 text-white">
+                  Subscribe
+                </Button>
               </form>
               {/* logo */}
               <div className="flex pl-2 items-center gap-5 text-muted-foreground">

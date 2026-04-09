@@ -14,7 +14,7 @@ import { reviewsData } from "@/components/shared/data";
 export default function CustomerReview() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center py-12">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto">
         <HomeSectionTitle firstTitle="Customer" lastTitle="Review" />
 
         <div className="px-5 md:px-12">
@@ -27,8 +27,8 @@ export default function CustomerReview() {
           >
             <CarouselContent className="grid grid-flow-col auto-cols-[100%] md:auto-cols-[50%] lg:auto-cols-[33.333333%] gap-0 ml-0">
               {reviewsData.map((review) => (
-                <CarouselItem key={review.id} className="pl-4 h-full">
-                  <Card className="h-full border shadow-sm hover:shadow-xl transition-all duration-500 bg-background group rounded-lg">
+                <CarouselItem key={review.id} className="pl-4 my-4">
+                  <Card className="h-full group relative p-4 rounded-lg border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/40 hover:bg-white dark:hover:bg-slate-900 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(79,70,229,0.1)] hover:-translate-y-2 cursor-default">
                     <CardContent className="px-8 pt-2 flex flex-col justify-between h-full relative">
                       <Quote className="absolute -top-1 right-8 w-12 h-12 text-primary/10 group-hover:text-primary/14 transition-colors" />
 

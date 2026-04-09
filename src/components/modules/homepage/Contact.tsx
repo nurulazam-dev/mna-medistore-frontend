@@ -92,7 +92,7 @@ const Contact = () => (
         </div>
 
         <div className="w-full">
-          <Card className="relative isolate rounded shadow lg:ms-auto">
+          <Card className="relative isolate rounded shadow lg:ms-auto border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/40 hover:bg-white dark:hover:bg-slate-900 transition-all duration-500">
             <CardHeader className="text-center">
               <CardTitle className="flex justify-center items-center gap-3 text-xl">
                 Send Us
@@ -150,7 +150,10 @@ const Contact = () => (
                     </Label>
                   </div>
                 </div>
-                <Button className="mt-6 w-full" size="lg">
+                <Button
+                  className="mt-6 w-full bg-green-600 hover:bg-green-700 text-white"
+                  size="lg"
+                >
                   Submit
                 </Button>
               </form>
