@@ -1,5 +1,6 @@
 import AboutUsStats from "@/components/modules/AboutUs/AboutUsStats";
 import WhyChooseUs from "@/components/modules/AboutUs/WhyChooseUs";
+import BestCard from "@/components/modules/homepage/BestCard";
 import Certifications from "@/components/modules/homepage/Certifications";
 import Contact from "@/components/modules/homepage/Contact";
 import CustomerReview from "@/components/modules/homepage/CustomerReview";
@@ -16,6 +17,8 @@ export default function Home() {
   return (
     <main className="mx-auto w-full max-w-(--breakpoint-xl) px-6">
       <Hero />
+      <BestCard />
+
       <MedicineCategories />
       <KeyFeatures />
       <FeaturedProducts />
