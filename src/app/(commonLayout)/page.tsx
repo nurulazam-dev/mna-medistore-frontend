@@ -1,5 +1,6 @@
 import AboutUsStats from "@/components/modules/AboutUs/AboutUsStats";
 import WhyChooseUs from "@/components/modules/AboutUs/WhyChooseUs";
+import Certifications from "@/components/modules/homepage/Certifications";
 import Contact from "@/components/modules/homepage/Contact";
 import CustomerReview from "@/components/modules/homepage/CustomerReview";
 import Hero from "@/components/modules/homepage/Hero";
@@ -14,7 +15,7 @@ export default function Home() {
       <KeyFeatures />
       <MedicineCategories />
       {/* <FeaturedProducts /> */}
-      {/* <Certifications /> */}
+      <Certifications />
       {/* <FlashSales /> */}
       {/* <HealthBlogs /> */}
       {/* <PartnerBrands /> */}

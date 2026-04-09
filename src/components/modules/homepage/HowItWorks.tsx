@@ -6,7 +6,7 @@ import HomeSectionTitle from "./HomeSectionTitle";
 
 export default function HowItWorks() {
   return (
-    <section className="py-12 bg-background transition-colors duration-300">
+    <section className="py-12">
       <div className="max-w-7xl mx-auto px-4">
         <HomeSectionTitle firstTitle="How It" lastTitle="Works" />
 

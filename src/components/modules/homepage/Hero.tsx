@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-background mb-10">
+    <section className="relative w-full min-h-screen flex items-center overflow-hidden mb-10">
       <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-125 h-125" />
       <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-100 h-100" />
 
