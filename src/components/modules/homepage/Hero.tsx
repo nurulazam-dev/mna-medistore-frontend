@@ -80,9 +80,9 @@ export default function Hero() {
             />
           </div>
 
-          <div className="absolute -bottom-2 -left-6 bg-slate-400 dark:bg-slate-800 p-4 rounded-xl shadow-2xl border border-border z-20 animate-bounce-slow">
+          <div className="absolute -bottom-2 -left-6 bg-slate-300 dark:bg-slate-800 p-4 rounded-xl shadow-2xl border border-border z-20 animate-bounce-slow">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-primary rounded-md flex items-center justify-center text-slate-400 font-black text-xl">
+              <div className="w-12 h-12 bg-slate-200 rounded-md flex items-center justify-center text-slate-700 font-black text-xl">
                 4.9
               </div>
               <div>

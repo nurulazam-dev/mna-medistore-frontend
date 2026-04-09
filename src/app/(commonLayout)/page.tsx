@@ -18,7 +18,6 @@ export default function Home() {
     <main className="mx-auto w-full max-w-(--breakpoint-xl) px-6">
       <Hero />
       <BestCard />
-
       <MedicineCategories />
       <KeyFeatures />
       <FeaturedProducts />
