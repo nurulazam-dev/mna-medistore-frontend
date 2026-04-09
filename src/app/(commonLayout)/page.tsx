@@ -3,6 +3,7 @@ import WhyChooseUs from "@/components/modules/AboutUs/WhyChooseUs";
 import Certifications from "@/components/modules/homepage/Certifications";
 import Contact from "@/components/modules/homepage/Contact";
 import CustomerReview from "@/components/modules/homepage/CustomerReview";
+import FeaturedProducts from "@/components/modules/homepage/FeaturedProducts";
 import Hero from "@/components/modules/homepage/Hero";
 import HowItWorks from "@/components/modules/homepage/HowItWorks";
 import KeyFeatures from "@/components/modules/homepage/KeyFeatures";
@@ -14,7 +15,7 @@ export default function Home() {
       <Hero />
       <KeyFeatures />
       <MedicineCategories />
-      {/* <FeaturedProducts /> */}
+      <FeaturedProducts />
       <Certifications />
       {/* <FlashSales /> */}
       {/* <HealthBlogs /> */}
