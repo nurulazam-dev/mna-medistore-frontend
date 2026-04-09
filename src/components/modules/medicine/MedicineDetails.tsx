@@ -11,6 +11,8 @@ import {
   Factory,
   Layers,
   Star,
+  UserCheck,
+  MessageSquare,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,6 +23,7 @@ import { IMedicineType } from "@/types";
 import { toast } from "sonner";
 import { addToCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
+import { cn } from "@/lib/utils"; // Shadcn utility for classes
 
 export default function MedicineDetails({
   medicine,
@@ -28,6 +31,7 @@ export default function MedicineDetails({
   medicine: IMedicineType;
 }) {
   const [quantity, setQuantity] = useState(1);
+  const [activeTab, setActiveTab] = useState("details"); // Tab State
   const dispatch = useAppDispatch();
 
   const isOutOfStock = (medicine?.stock ?? 0) <= 0;
@@ -53,6 +57,7 @@ export default function MedicineDetails({
   return (
     <div className="container mx-auto px-4 py-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        {/* Image Section */}
         <div className="relative aspect-square overflow-hidden rounded-xl bg-slate-50 border border-slate-100 shadow-sm group">
           <Image
             src={medicine?.image || "/placeholder-medicine.png"}
@@ -66,13 +71,14 @@ export default function MedicineDetails({
           </Badge>
         </div>
 
+        {/* Info Section */}
         <div className="flex flex-col space-y-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-indigo-600 font-semibold text-sm">
               <Factory size={16} />
               <span>{medicine?.manufacturer}</span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-black text-slate-300 tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">
               {medicine?.name}
             </h1>
             <div className="flex items-center gap-3 mt-2">
@@ -95,18 +101,19 @@ export default function MedicineDetails({
             <span className="text-sm text-slate-400 font-medium">per unit</span>
           </div>
 
-          <p className="text-slate-300 leading-relaxed text-sm md:text-base italic">
+          <p className="text-slate-600 leading-relaxed text-sm md:text-base italic">
             {medicine?.description}
           </p>
 
           <Separator className="bg-slate-100" />
 
+          {/* Quantity & Cart */}
           <div className="space-y-4">
             <p className="text-xs font-bold text-slate-500 uppercase">
               Select Quantity
             </p>
             <div className="flex flex-wrap items-center gap-4">
-              <div className="flex items-center border border-slate-200 rounded-xl p-1 bg-slate-700 shadow-sm">
+              <div className="flex items-center border border-slate-200 rounded-xl p-1 bg-white shadow-sm">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -116,7 +123,7 @@ export default function MedicineDetails({
                 >
                   <Minus size={16} />
                 </Button>
-                <span className="w-12 text-center font-bold text-lg">
+                <span className="w-12 text-center font-bold text-lg text-slate-800">
                   {quantity}
                 </span>
                 <Button
@@ -138,7 +145,7 @@ export default function MedicineDetails({
                 disabled={isOutOfStock}
               >
                 <ShoppingCart size={18} />
-                {isOutOfStock ? "Notify Me When Available" : "Add to Cart"}
+                {isOutOfStock ? "Notify Me" : "Add to Cart"}
               </Button>
             </div>
           </div>
@@ -171,73 +178,143 @@ export default function MedicineDetails({
       </div>
 
       <div className="mt-20">
-        <div className="flex gap-8 border-b border-slate-100 mb-8 overflow-x-auto">
-          <button className="pb-4 border-b-2 border-indigo-600 font-bold text-sm text-slate-900 whitespace-nowrap">
+        <div className="flex gap-8 border-b border-slate-100 mb-8 overflow-x-auto scrollbar-hide">
+          <button
+            onClick={() => setActiveTab("details")}
+            className={cn(
+              "pb-4 border-b-2 transition-all font-bold text-sm whitespace-nowrap",
+              activeTab === "details"
+                ? "border-indigo-600 text-slate-900"
+                : "border-transparent text-slate-400 hover:text-slate-600",
+            )}
+          >
             Product Details
           </button>
-          <button className="pb-4 border-b-2 border-transparent font-medium text-sm text-slate-400 hover:text-slate-600 whitespace-nowrap">
+
+          <button
+            onClick={() => setActiveTab("reviews")}
+            className={cn(
+              "pb-4 border-b-2 transition-all font-bold text-sm whitespace-nowrap",
+              activeTab === "reviews"
+                ? "border-indigo-600 text-slate-900"
+                : "border-transparent text-slate-400 hover:text-slate-600",
+            )}
+          >
             Reviews ({medicine.reviews?.length || 0})
           </button>
-          <button className="pb-4 border-b-2 border-transparent font-medium text-sm text-slate-400 hover:text-slate-600 whitespace-nowrap">
+
+          <button
+            onClick={() => setActiveTab("seller")}
+            className={cn(
+              "pb-4 border-b-2 transition-all font-bold text-sm whitespace-nowrap",
+              activeTab === "seller"
+                ? "border-indigo-600 text-slate-900"
+                : "border-transparent text-slate-400 hover:text-slate-600",
+            )}
+          >
             Seller Information
           </button>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-12">
-          <div className="md:col-span-2 space-y-6">
-            <div className="flex items-start gap-3">
-              <Info className="text-indigo-500 mt-1" size={18} />
-              <div className="space-y-4">
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  {medicine.description}
-                </p>
-                <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 flex gap-3 italic text-xs text-blue-700">
-                  <AlertCircle size={16} />
-                  Note: Please consult with a doctor before consuming any
-                  medication.
+        <div className="min-h-75">
+          {activeTab === "details" && (
+            <div className="grid md:grid-cols-3 gap-12 animate-in fade-in duration-500">
+              <div className="md:col-span-2 space-y-6">
+                <div className="flex items-start gap-3">
+                  <Info className="text-indigo-500 mt-1" size={18} />
+                  <div className="space-y-4">
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      {medicine.description}
+                    </p>
+                    <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 flex gap-3 italic text-xs text-blue-700">
+                      <AlertCircle size={16} />
+                      Note: Please consult with a doctor before consuming any
+                      medication.
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div className="bg-slate-900 rounded-xl p-6 text-white h-fit shadow-md shadow-slate-200">
-            <h4 className="font-bold flex items-center gap-2 mb-6">
-              <Layers size={18} className="text-indigo-400" /> Technical Details
-            </h4>
-            <ul className="space-y-4 text-xs">
-              <li className="flex justify-between border-b border-white/10 pb-3">
-                <span className="text-slate-400 uppercase">Manufacturer</span>
-                <span className="font-bold tracking-wide">
-                  {medicine.manufacturer}
-                </span>
-              </li>
-              <li className="flex justify-between border-b border-white/10 pb-3">
-                <span className="text-slate-400 uppercase">Category</span>
-                <span className="font-bold">
-                  {medicine?.category?.name || "General"}
-                </span>
-              </li>
-              <li className="flex justify-between border-b border-white/10 pb-3">
-                <span className="text-slate-400 uppercase">Rating</span>
-                <span className="font-bold flex items-center gap-1">
-                  4.8{" "}
-                  <Star size={10} className="fill-amber-400 text-amber-400" />
-                </span>
-              </li>
-              <li className="flex justify-between pt-2">
-                <span className="text-slate-400 uppercase">
-                  Verified Seller
-                </span>
-                <span className="text-emerald-400 font-bold">Authorized</span>
-              </li>
-            </ul>
-            <Button
-              variant="outline"
-              className="w-full mt-6 bg-transparent border-white/20 hover:bg-white/10 text-white rounded-xl text-[10px] uppercase font-bold tracking-widest"
-            >
-              Visit Seller Profile
-            </Button>
-          </div>
+              <div className="bg-slate-900 rounded-xl p-6 text-white h-fit shadow-md shadow-slate-200">
+                <h4 className="font-bold flex items-center gap-2 mb-6">
+                  <Layers size={18} className="text-indigo-400" /> Technical
+                  Details
+                </h4>
+                <ul className="space-y-4 text-xs">
+                  <li className="flex justify-between border-b border-white/10 pb-3">
+                    <span className="text-slate-400 uppercase">
+                      Manufacturer
+                    </span>
+                    <span className="font-bold tracking-wide">
+                      {medicine.manufacturer}
+                    </span>
+                  </li>
+                  <li className="flex justify-between border-b border-white/10 pb-3">
+                    <span className="text-slate-400 uppercase">Category</span>
+                    <span className="font-bold">
+                      {medicine?.category?.name || "General"}
+                    </span>
+                  </li>
+                  <li className="flex justify-between border-b border-white/10 pb-3">
+                    <span className="text-slate-400 uppercase">Rating</span>
+                    <span className="font-bold flex items-center gap-1">
+                      4.8{" "}
+                      <Star
+                        size={10}
+                        className="fill-amber-400 text-amber-400"
+                      />
+                    </span>
+                  </li>
+                  <li className="flex justify-between pt-2">
+                    <span className="text-slate-400 uppercase">
+                      Verified Seller
+                    </span>
+                    <span className="text-emerald-400 font-bold">
+                      Authorized
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {activeTab === "reviews" && (
+            <div className="flex flex-col items-center justify-center py-10 text-slate-400 animate-in slide-in-from-bottom-2 duration-500">
+              <MessageSquare size={48} className="mb-4 opacity-20" />
+              <p className="text-sm font-medium">
+                No reviews yet for this product.
+              </p>
+              <Button variant="link" className="text-indigo-600 mt-2">
+                Be the first to review
+              </Button>
+            </div>
+          )}
+
+          {activeTab === "seller" && (
+            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-8 animate-in zoom-in-95 duration-500">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="size-14 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                  <UserCheck size={28} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900 text-lg">
+                    MNA Authorized Pharma
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    Certified Medical Distributor Since 2020
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm text-slate-600 max-w-2xl mb-6">
+                This seller is verified by MNA-Medistore. All products sold by
+                this seller are sourced directly from manufacturers and stored
+                in temperature-controlled environments.
+              </p>
+              <Button variant="outline" className="rounded-xl px-8">
+                Visit Store
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

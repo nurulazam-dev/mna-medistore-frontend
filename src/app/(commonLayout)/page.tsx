@@ -13,6 +13,13 @@ export default function Home() {
       <Hero />
       <KeyFeatures />
       <MedicineCategories />
+      {/* <FeaturedProducts /> */}
+      {/* <Certifications /> */}
+      {/* <FlashSales /> */}
+      {/* <HealthBlogs /> */}
+      {/* <PartnerBrands /> */}
+      {/* <Newsletter /> */}
+      {/* <FAQSection /> */}
       <HowItWorks />
       <AboutUsStats />
       <WhyChooseUs />
