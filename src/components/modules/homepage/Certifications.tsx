@@ -19,10 +19,10 @@ const certifications = [
     id: "ISO-QMS-2026",
   },
   {
-    title: "GDPR Compliant",
+    title: "GDPR Compliant Platform",
     org: "Data Privacy & Security",
     description:
-      "Ensuring the highest level of security and privacy for patient and user data.",
+      "Ensuring the highest level of security and privacy for patient and user data. Fully compliant with GDPR regulations.",
     icon: <BadgeCheck className="text-indigo-500" size={32} />,
     id: "GDPR-MNA-09",
   },
@@ -58,7 +58,7 @@ export default function Certifications() {
           {certifications.map((cert, index) => (
             <div
               key={index}
-              className="group relative p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/40 hover:bg-white dark:hover:bg-slate-900 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(79,70,229,0.1)] hover:-translate-y-2 cursor-default"
+              className="group relative p-8 rounded-lg border border-slate-100 dark:border-slate-800/60 bg-slate-50/50 dark:bg-slate-900/40 hover:bg-white dark:hover:bg-slate-900 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(79,70,229,0.1)] hover:-translate-y-2 cursor-default"
             >
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl group-hover:bg-indigo-500/10 transition-all duration-500" />
 
